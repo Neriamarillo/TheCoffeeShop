@@ -1,0 +1,180 @@
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+  padding: 20px;
+}
+
+h1 {
+  letter-spacing: 1px;
+}
+
+.content h1 {
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.navbar-brand {
+  color: white;
+  padding-left: 12px;
+}
+
+.navbar-toggler,
+.navbar-toggler:focus {
+  color: transparent;
+  outline: none;
+  border: 0px solid transparent;
+  border-color: transparent;
+  padding-right: 12px;
+}
+
+.navSearch {
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.navSearch > .form-control {
+  border: transparent;
+  color: white;
+}
+
+#profile > button,
+#cart > button {
+  /* padding: 0.75rem; */
+  color: white;
+  font-size: 1.2rem;
+}
+
+.footerLinks {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.footerLinks > svg {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.footer-copyright {
+  color: white;
+}
+
+.loginContainer {
+  width: 100%;
+  height: 100vh;
+
+  text-align: center;
+}
+
+.loginForm {
+  /* max-width: 300px; */
+  display: block;
+  text-align: left;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-columns: min-content;
+  grid-auto-rows: min-content;
+  row-gap: 25px;
+  column-gap: 25px;
+  padding: 1.25rem;
+}
+/* 
+.cardSmall {
+  width: 18rem;
+} */
+
+.cardMd {
+  width: 30rem;
+}
+
+.cardBig {
+  width: 100%;
+  max-width: 100%;
+  /* height: 97vh; */
+  height: 75vh;
+  /* flex-direction: row;
+  flex: 1; */
+}
+
+.cardBig .card-title {
+  font-size: 2rem;
+}
+
+.cardImg-sm {
+  /* width: 100%; */
+  height: 50vh;
+  object-fit: contain;
+  align-content: center;
+}
+
+.cardImgEcart {
+  width: 130px;
+  height: 130px;
+  /* height: 50vh; */
+  object-fit: contain;
+  align-content: center;
+}
+
+.cardImg-lg {
+  /* width: 100%; */
+  /* max-width: 50vh; */
+  /* min-height: auto; */
+  height: 60vw;
+  object-fit: contain;
+  align-content: center;
+}
+
+.card-img-top {
+  max-height: 250px;
+  min-height: 200px;
+  object-fit: contain;
+}
+
+.input-group-sm,
+.input-group-text {
+  background-color: transparent;
+}
+
+.input-group-sm svg {
+  font-size: 0.9rem;
+}
+
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.success {
+  color: #4bbf73;
+}
+
+.failure {
+  color: #d9534f;
+}
+
+.rating {
+  color: gold;
+}
+
+.deleteCart svg {
+  font-size: 0.9rem;
+}
