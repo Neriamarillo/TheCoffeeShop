@@ -4,17 +4,18 @@ body,
   height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  height: -webkit-fill-available;
 }
 
 #root {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 .content {
   flex: 1;
-  height: 100vh;
-  padding: 20px;
 }
 
 h1 {
@@ -41,6 +42,10 @@ h1 {
   padding-right: 12px;
 }
 
+#search > input::placeholder {
+  color: white;
+}
+
 .navSearch {
   align-items: center;
   border: 1px solid #ced4da;
@@ -54,7 +59,6 @@ h1 {
 
 #profile > button,
 #cart > button {
-  /* padding: 0.75rem; */
   color: white;
   font-size: 1.2rem;
 }
@@ -83,7 +87,6 @@ a.footerLinks > svg {
 }
 
 .loginForm {
-  /* max-width: 300px; */
   display: block;
   text-align: left;
 }
@@ -135,11 +138,6 @@ a.footerLinks > svg {
   max-height: 250px;
   min-height: 200px;
   object-fit: contain;
-}
-
-.input-group-sm,
-.input-group-text {
-  background-color: transparent;
 }
 
 .input-group-sm svg {

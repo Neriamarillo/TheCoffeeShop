@@ -5,7 +5,7 @@ const Footer = () => {
   const currYear = new Date().getFullYear();
 
   return (
-    <footer className="footer bg-dark mt-auto py-3">
+    <footer className="footer bg-primary mt-auto py-3">
       <Row>
         <Col md={12} className="py-1">
           <div className="footerLinks">

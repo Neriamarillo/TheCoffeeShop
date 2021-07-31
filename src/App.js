@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
 import { Container } from "react-bootstrap";
 
 function App() {
@@ -7,9 +8,9 @@ function App() {
     <div className="App">
       <Header />
       <div className="content">
-        <Container>
-          <h1>App</h1>
-        </Container>
+        {/* <Container> */}
+        <Login />
+        {/* </Container> */}
       </div>
       <Footer />
     </div>

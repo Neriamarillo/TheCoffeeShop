@@ -5,18 +5,20 @@ import {
   FormControl,
   Button,
   InputGroup,
+  // Badge,
 } from "react-bootstrap";
 import { MdAccountCircle } from "react-icons/md";
-import { FaCoffee, FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FiCoffee } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
 function Header(props) {
   const history = useHistory();
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar expand="lg" bg="primary" variant="primary">
       <Navbar.Brand>
-        <FaCoffee /> Coffee Shop
+        <FiCoffee /> The Coffee Shop
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -25,9 +27,9 @@ function Header(props) {
             <FormControl
               type="search"
               placeholder="Search"
-              className="mr-3 bg-secondary"
+              className="mr-3 bg-primary"
             />
-            <Button variant="secondary" className="bg-secondary">
+            <Button variant="dark" className="bg-primary">
               <FaSearch />
             </Button>
           </InputGroup>
@@ -39,8 +41,8 @@ function Header(props) {
               onClick={() => {
                 history.push("/account");
               }}
-              variant="secondary"
-              className="bg-secondary"
+              variant="dark"
+              className="bg-primary"
             >
               <MdAccountCircle className="navIcons" />
             </Button>
@@ -51,11 +53,15 @@ function Header(props) {
               onClick={() => {
                 history.push("/cart");
               }}
-              variant="secondary"
-              className="bg-secondary"
+              variant="dark"
+              className="bg-primary"
             >
               <FaShoppingCart className="navIcons" />
-              {/* Badge  */}
+              {/* {props.cartItems.length > 0 && (
+                <Badge className="position-static top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {props.cartItems.length}
+                </Badge>
+              )} */}
             </Button>
           </Nav.Item>
         </Nav>
