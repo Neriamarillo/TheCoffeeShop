@@ -5,15 +5,18 @@ import {
   FormControl,
   Button,
   InputGroup,
-  // Badge,
+  Badge,
 } from "react-bootstrap";
 import { MdAccountCircle } from "react-icons/md";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
-// import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header(props) {
-  // const history = useHistory();
+  const cartItemCount = props.cartItems.reduce(
+    (accum, curr) => accum + curr.qty,
+    0
+  );
 
   return (
     <Navbar expand="lg" bg="primary" variant="primary">
@@ -36,33 +39,23 @@ function Header(props) {
         </Form>
         <Nav className="ms-2 p-2">
           <Nav.Item className="me-0 " id="profile">
-            <Button
-              size="sm"
-              // onClick={() => {
-              //   history.push("/account");
-              // }}
-              variant="dark"
-              className="bg-primary"
-            >
-              <MdAccountCircle className="navIcons" />
-            </Button>
+            <Link to="/account">
+              <Button size="sm" variant="dark" className="bg-primary">
+                <MdAccountCircle className="navIcons" />
+              </Button>
+            </Link>
           </Nav.Item>
           <Nav.Item className="me-0 ms-2" id="cart">
-            <Button
-              size="sm"
-              // onClick={() => {
-              //   history.push("/cart");
-              // }}
-              variant="dark"
-              className="bg-primary"
-            >
-              <FaShoppingCart className="navIcons" />
-              {/* {props.cartItems.length > 0 && (
-                <Badge className="position-static top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {props.cartItems.length}
-                </Badge>
-              )} */}
-            </Button>
+            <Link to="/cart">
+              <Button size="sm" variant="dark" className="bg-primary">
+                <FaShoppingCart className="navIcons" />
+                {cartItemCount > 0 && (
+                  <Badge className="position-static top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartItemCount}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>

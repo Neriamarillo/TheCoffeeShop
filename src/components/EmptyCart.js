@@ -1,10 +1,8 @@
 import { Row, Col, Card, Button } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
-  const history = useHistory();
-
   return (
     // <div className="mt-100">
     <Row className="mx-auto">
@@ -22,14 +20,9 @@ const EmptyCart = () => {
                   <strong>Your Cart is Empty</strong>
                 </h3>
               </Card.Text>
-              <Button
-                onClick={() => {
-                  history.push("/home");
-                }}
-                class="m-3"
-              >
-                Continue Shopping
-              </Button>
+              <Link to="/products">
+                <Button class="m-3">Continue Shopping</Button>
+              </Link>
             </Col>
           </Card.Body>
         </Card>

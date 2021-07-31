@@ -8,19 +8,6 @@ import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
 function ProductCard(props) {
   const { product } = props;
-  // const [qty, setQty] = useState(1);
-
-  // const handleDecrement = () => {
-  //   setQty((prevQty) => (qty > 0 ? prevQty - 1 : qty));
-  // };
-
-  // const handleIncrement = () => {
-  //   setQty((prevQty) => (prevQty < product.stock ? prevQty + 1 : prevQty));
-  // };
-
-  // const addToCartHandler = () => {
-  //   props.history.push(`/cart/${product.id}?qty=${qty}`);
-  // };
 
   return (
     <Card className="rounded shadow productCard ">

@@ -5,108 +5,119 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 import Rating from "../components/Rating";
 import currencyFormat from "../helpers/utils";
-import { Card, InputGroup, Button, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  InputGroup,
+  Button,
+  Row,
+  Col,
+  Container,
+  Form,
+} from "react-bootstrap";
+import { addToCart } from "../actions/cartActions.js";
 import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
-function Product(props) {
-  // const dispatch = useDispatch();
-  // const productId = props.match.params.id;
-  // const productDetails = useSelector((state) => state.productDetails);
-  // const { loading, error, product } = productDetails;
+function ProductDetail(props) {
+  const dispatch = useDispatch();
+  const productId = props.match.params.id;
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
 
-  // const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(1);
 
-  // useEffect(() => {
-  //   dispatch(detailsProduct(productId));
-  // }, [dispatch, productId]);
+  useEffect(() => {
+    dispatch(detailsProduct(productId));
+  }, [dispatch, productId]);
 
-  // const handleDecrement = () => {
-  //   setQty((prevQty) => (qty > 0 ? prevQty - 1 : qty));
-  // };
+  const handleChangeQty = (event) => {
+    setQty(event.target.value);
+  };
 
-  // const handleIncrement = () => {
-  //   setQty((prevQty) => (prevQty < product.stock ? prevQty + 1 : prevQty));
-  // };
-
-  // const addToCartHandler = () => {
-  //   props.history.push(`/cart/${product.id}?qty=${qty}`);
-  // };
+  const addToCartHandler = () => {
+    dispatch(addToCart(productId, Number(qty)));
+    // Goal to remove this link to cart
+    props.history.push(`/cart/${product.id}?qty=${qty}`);
+  };
 
   return (
-    <div>
-      {/* {loading ? (
+    <Container fluid className="h-100 w-100 px-0">
+      {loading ? (
         <Loading />
       ) : error ? (
         <Message>{error}</Message>
-      ) : ( */}
-      <Card className="px-auto h-100">
-        <Row className="g-0">
-          <Col xs={12} md={6}>
-            <Card.Img src={product.image} className="img-fluid" />
-          </Col>
-          <Col xs={12} md={6}>
-            <Card.Body>
-              <Card.Title>{product.name}</Card.Title>
-              <Card.Text>{product.brand}</Card.Text>
-              <Card.Text>{product.description}</Card.Text>
-              <Card.Text className="">
-                {
+      ) : (
+        <Card className="h-100">
+          <Row className="g-0">
+            <Col xs={12} md={6} className="productDetailCard">
+              <Card.Img src={product.image} className="img-fluid" />
+            </Col>
+            <Col xs={12} md={6}>
+              <Card.Body>
+                <Card.Title id="name">{product.name}</Card.Title>
+                <Card.Text id="brand" className="my-2">
+                  {product.brand}
+                </Card.Text>
+                <Card.Text id="description" className="my-2">
+                  {product.description}
+                </Card.Text>
+                <Card.Text className="my-2" id="rating">
                   <Rating
                     key={product.id}
                     rating={product.rating ? product.rating : 0}
-                  />
-                }
-              </Card.Text>
-              <Card.Text style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-                {currencyFormat(product.price)}
-              </Card.Text>
-              {product.stock > 0 ? (
-                <Card.Text className="success">
-                  {product.stock} In Stock
+                  />{" "}
+                  {product.rating}
                 </Card.Text>
-              ) : (
-                <Card.Text className="failure">Sold Out</Card.Text>
-              )}
-              <>
-                <Row>
-                  <Col xs={12} lg={6}>
-                    <InputGroup className="input-group-sm pb-3">
+                <Card.Text
+                  id="price"
+                  style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                  className="my-0"
+                >
+                  {currencyFormat(product.price)}
+                </Card.Text>
+                <div id="availability" className="mb-3">
+                  {product.stock > 0 ? (
+                    <Card.Text className="success">
+                      {product.stock} In Stock
+                    </Card.Text>
+                  ) : (
+                    <Card.Text className="failure">Sold Out</Card.Text>
+                  )}
+                </div>
+                <>
+                  <Row>
+                    <Col xs={3} lg={3}>
+                      <Form.Select
+                        value={product.qty}
+                        onChange={handleChangeQty}
+                      >
+                        {[...Array(product.stock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="my-3">
                       <Button
-                        // onClick={handleDecrement}
-                        className="counterBtn"
-                        style={{ backgroundColor: "firebrick" }}
+                        variant="primary"
+                        className="btn-small ms-auto shadow-sm"
+                        onClick={addToCartHandler}
                         disabled={product.stock === 0}
                       >
-                        <MdRemoveCircle style={{ color: "white" }} />
+                        Add to Cart
                       </Button>
-                      <InputGroup.Text>Qty: {qty}</InputGroup.Text>
-                      <Button
-                        onClick={handleIncrement}
-                        disabled={product.stock === 0}
-                      >
-                        <MdAddCircle style={{ color: "white" }} />
-                      </Button>
-                    </InputGroup>
-                  </Col>
-                  <Col className="text-center" lg={{ span: 4, offset: 2 }}>
-                    <Button
-                      variant="primary"
-                      className="btn-small ms-auto"
-                      onClick={addToCartHandler}
-                      disabled={product.stock === 0}
-                    >
-                      Add to Cart
-                    </Button>
-                  </Col>
-                </Row>
-              </>
-            </Card.Body>
-          </Col>
-        </Row>
-      </Card>
-      {/* )} */}
-    </div>
+                    </Col>
+                  </Row>
+                </>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
+      )}
+    </Container>
   );
 }
 
-export default Product;
+export default ProductDetail;

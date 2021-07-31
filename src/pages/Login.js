@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <Container className="py-5">
-      <Row className=" justify-content-center align-items-center">
+    <Container fluid className=" w-75 h-100">
+      <Row className=" justify-content-center align-items-center h-100">
         <Col xl={10} className="">
           <Card className="rounded shadow ">
             <Row className=" g-0">
