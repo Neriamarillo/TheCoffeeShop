@@ -10,10 +10,10 @@ import {
 import { MdAccountCircle } from "react-icons/md";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 function Header(props) {
-  const history = useHistory();
+  // const history = useHistory();
 
   return (
     <Navbar expand="lg" bg="primary" variant="primary">
@@ -38,9 +38,9 @@ function Header(props) {
           <Nav.Item className="me-0 " id="profile">
             <Button
               size="sm"
-              onClick={() => {
-                history.push("/account");
-              }}
+              // onClick={() => {
+              //   history.push("/account");
+              // }}
               variant="dark"
               className="bg-primary"
             >
@@ -50,9 +50,9 @@ function Header(props) {
           <Nav.Item className="me-0 ms-2" id="cart">
             <Button
               size="sm"
-              onClick={() => {
-                history.push("/cart");
-              }}
+              // onClick={() => {
+              //   history.push("/cart");
+              // }}
               variant="dark"
               className="bg-primary"
             >
