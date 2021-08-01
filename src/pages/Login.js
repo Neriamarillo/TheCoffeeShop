@@ -10,79 +10,189 @@ import {
 import { MdAccountCircle, MdVpnKey } from "react-icons/md";
 import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions/userActions";
+import Loading from "../components/Loading";
+import Message from "../components/Message";
 
-const Login = () => {
+const Login = (props) => {
+  const [registerUsername, setRegisterUsername] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [isAuth, setIsAuth] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo, loading, error } = userLogin;
+
+  const dispatch = useDispatch();
+
+  const loginHandler = (event) => {
+    event.preventDefault();
+    dispatch(login(loginUsername, loginPassword));
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push("/products");
+    }
+  }, [props.history, userInfo]);
+
   return (
-    <Container fluid className=" w-75 h-100">
-      <Row className=" justify-content-center align-items-center h-100">
-        <Col xl={10} className="">
-          <Card className="rounded shadow ">
-            <Row className=" g-0">
-              <Col md={4} lg={5} className="d-none d-md-block">
-                <img
-                  src="/images/beans-bg.jpg"
-                  className="img-fluid bg-white rounded"
-                  alt=""
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </Col>
-              <Col md={8} lg={7} className="d-flex align-items-center">
-                <Card.Body className="card-body p-4 p-lg-5 text-black">
-                  <Form>
-                    <Card.Title className="d-flex align-items-center mb-3 pb-1">
-                      <FiCoffee className="h1 pt-2" />
-                      <span className="h1 fw-bold mb-0 ps-2">
-                        The Coffee Shop
-                      </span>
-                    </Card.Title>
+    <>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Message type="login">{error}</Message>
+      ) : (
+        <Container fluid className=" w-75 h-100">
+          <Row className=" justify-content-center align-items-center h-100">
+            <Col xl={10} className="">
+              <Card className="rounded shadow ">
+                <Row className=" g-0">
+                  <Col md={4} lg={5} className="d-none d-md-block">
+                    <img
+                      src="/images/beans-bg.jpg"
+                      className="img-fluid bg-white rounded"
+                      alt=""
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </Col>
+                  <Col md={8} lg={7} className="d-flex align-items-center">
+                    <Card.Body className="card-body p-4 p-lg-5 text-black">
+                      <Form>
+                        <Card.Title className="d-flex align-items-center mb-3 pb-1">
+                          <FiCoffee className="h1 pt-2" />
+                          <span className="h1 fw-bold mb-0 ps-2">
+                            The Coffee Shop
+                          </span>
+                        </Card.Title>
 
-                    <h5 className="fw-normal h4 mb-3 pb-2">Sign in</h5>
+                        {true ? (
+                          <div id="login">
+                            <h5 className="fw-normal h4 mb-3 pb-2">Login</h5>
+                            <Form.Group
+                              id="username"
+                              className="form-outline mb-4"
+                            >
+                              <InputGroup>
+                                <Form.Control
+                                  type="text"
+                                  className="form-control form-control-lg"
+                                  placeholder="Username"
+                                  onChange={(e) =>
+                                    setLoginUsername(e.target.value)
+                                  }
+                                />
+                                <InputGroup.Text>
+                                  <MdAccountCircle />
+                                </InputGroup.Text>
+                              </InputGroup>
+                            </Form.Group>
 
-                    <Form.Group className="form-outline mb-4">
-                      <InputGroup>
-                        <Form.Control
-                          type="text"
-                          className="form-control form-control-lg"
-                          placeholder="Username"
-                        />
-                        <InputGroup.Text>
-                          <MdAccountCircle />
-                        </InputGroup.Text>
-                      </InputGroup>
-                    </Form.Group>
+                            <Form.Group
+                              id="password"
+                              className="form-outline mb-4"
+                            >
+                              <InputGroup>
+                                <Form.Control
+                                  type="password"
+                                  className="form-control form-control-lg"
+                                  placeholder="Password"
+                                  onChange={(e) =>
+                                    setLoginPassword(e.target.value)
+                                  }
+                                />
+                                <InputGroup.Text>
+                                  <MdVpnKey />
+                                </InputGroup.Text>
+                              </InputGroup>
+                            </Form.Group>
 
-                    <Form.Group className="form-outline mb-4">
-                      <InputGroup>
-                        <Form.Control
-                          type="password"
-                          className="form-control form-control-lg"
-                          placeholder="Password"
-                        />
-                        <InputGroup.Text>
-                          <MdVpnKey />
-                        </InputGroup.Text>
-                      </InputGroup>
-                    </Form.Group>
+                            <div id="loginButton" className="pt-1 mb-4">
+                              <Link to="/products">
+                                <Button
+                                  size="lg"
+                                  className="w-100 shadow"
+                                  variant="dark"
+                                  onClick={loginHandler}
+                                >
+                                  Login
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        ) : (
+                          <div id="register">
+                            <h5 className="fw-normal h4 mb-3 pb-2">Register</h5>
+                            <Form.Group
+                              id="username"
+                              className="form-outline mb-4"
+                            >
+                              <InputGroup>
+                                <Form.Control
+                                  type="text"
+                                  className="form-control form-control-lg"
+                                  placeholder="Username"
+                                  onChange={(e) =>
+                                    setRegisterUsername(e.target.value)
+                                  }
+                                />
+                                <InputGroup.Text>
+                                  <MdAccountCircle />
+                                </InputGroup.Text>
+                              </InputGroup>
+                            </Form.Group>
 
-                    <div className="pt-1 mb-4">
-                      <Link to="/products">
-                        <Button
-                          size="lg"
-                          className="w-100 shadow"
-                          variant="dark"
-                        >
-                          Login
-                        </Button>
-                      </Link>
-                    </div>
-                  </Form>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+                            <Form.Group
+                              id="password"
+                              className="form-outline mb-4"
+                            >
+                              <InputGroup>
+                                <Form.Control
+                                  type="password"
+                                  className="form-control form-control-lg"
+                                  placeholder="Password"
+                                  onChange={(e) =>
+                                    setRegisterPassword(e.target.value)
+                                  }
+                                />
+                                <InputGroup.Text>
+                                  <MdVpnKey />
+                                </InputGroup.Text>
+                              </InputGroup>
+                            </Form.Group>
+
+                            <div id="registerButton" className="pt-1 mb-4">
+                              {/* <Link to="/products"> */}
+                              <Button
+                                size="lg"
+                                className="w-100 shadow"
+                                variant="dark"
+                                // onClick={register}
+                              >
+                                Register
+                              </Button>
+                              {/* </Link> */}
+                            </div>
+                          </div>
+                        )}
+                      </Form>
+                    </Card.Body>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      )}
+    </>
   );
 };
 

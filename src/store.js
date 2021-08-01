@@ -5,8 +5,14 @@ import {
   productListReducer,
   productDetailsReducer,
 } from "./reducers/productReducers";
+import userLoginReducer from "./reducers/userReducers";
 
 const initialState = {
+  userLogin: {
+    userInfo: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
+  },
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
@@ -17,6 +23,7 @@ const rootReducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
+  userLogin: userLoginReducer,
 });
 
 // View states in redux extension in browser dev tools

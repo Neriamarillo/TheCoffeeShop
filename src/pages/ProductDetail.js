@@ -5,17 +5,8 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 import Rating from "../components/Rating";
 import currencyFormat from "../helpers/utils";
-import {
-  Card,
-  InputGroup,
-  Button,
-  Row,
-  Col,
-  Container,
-  Form,
-} from "react-bootstrap";
+import { Card, Button, Row, Col, Container, Form } from "react-bootstrap";
 import { addToCart } from "../actions/cartActions.js";
-import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
 function ProductDetail(props) {
   const dispatch = useDispatch();

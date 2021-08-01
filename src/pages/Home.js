@@ -3,7 +3,6 @@ import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import { Row, Col } from "react-bootstrap";
-import data from "../data";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { productsList } from "../actions/productActions";

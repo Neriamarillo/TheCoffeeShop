@@ -39,10 +39,9 @@ function Cart(props) {
     // props.history.push("/confirmation");
   };
 
-  const subtotal = cartItems.reduce(
-    (accum, curr) => accum + curr.price * curr.qty,
-    0
-  );
+  const subtotal =
+    cartItems &&
+    cartItems.reduce((accum, curr) => accum + curr.price * curr.qty, 0);
   // Change taxRate according to state (Current is Texas)
   const taxRate = 0.0625;
   const salesTax = subtotal * taxRate;
@@ -50,7 +49,7 @@ function Cart(props) {
 
   return (
     <>
-      {cartItems.length === 0 ? (
+      {cartItems && cartItems.length === 0 ? (
         /* Empty Cart Component */
         <div>
           <EmptyCart />

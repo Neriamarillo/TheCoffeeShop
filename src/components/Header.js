@@ -13,15 +13,16 @@ import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 function Header(props) {
-  const cartItemCount = props.cartItems.reduce(
-    (accum, curr) => accum + curr.qty,
-    0
-  );
+  const cartItemCount = props.cartItems
+    ? props.cartItems.reduce((accum, curr) => accum + curr.qty, 0)
+    : 0;
 
   return (
     <Navbar expand="lg" bg="primary" variant="primary">
-      <Navbar.Brand>
-        <FiCoffee /> The Coffee Shop
+      <Navbar.Brand className="ps-3">
+        <Link to="/products">
+          <FiCoffee /> The Coffee Shop
+        </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">

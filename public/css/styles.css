@@ -36,9 +36,9 @@ h1 {
   justify-content: center;
 }
 
-.navbar-brand {
+.navbar-brand > a {
+  text-decoration: none;
   color: white;
-  padding-left: 12px;
 }
 
 .navbar-toggler,
@@ -65,11 +65,13 @@ h1 {
   color: white;
 }
 
-#profile > button,
-#cart > button {
+#profile > a > button > svg,
+#cart > a > button > svg {
   color: white;
   font-size: 1.2rem;
 }
+
+/* #cart > a > button > svg */
 
 .footerLinks {
   text-align: center;
