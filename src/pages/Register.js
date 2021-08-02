@@ -11,31 +11,35 @@ import { MdAccountCircle, MdVpnKey } from "react-icons/md";
 import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userActions";
+import { register } from "../actions/userActions";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 
-const Login = (props) => {
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [isAuth, setIsAuth] = useState("");
+const Register = (props) => {
+  const [registerUsername, setRegisterUsername] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, loading, error } = userLogin;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
 
   const dispatch = useDispatch();
 
-  const loginHandler = (event) => {
+  const registerHandler = (event) => {
     event.preventDefault();
-    dispatch(login(loginUsername, loginPassword));
+    dispatch(register(registerUsername, registerPassword));
   };
 
-  useEffect(() => {
-    if (userInfo) {
-      props.history.push("/products");
-    }
-  }, [props.history, userInfo]);
+  const toLoginHandler = () => {
+    props.history.push("/login");
+  };
+
+  //   useEffect(() => {
+  //     if (userInfo) {
+  //       props.history.push("/login");
+  //     }
+  //   }, [props.history, userInfo]);
 
   return (
     <>
@@ -70,8 +74,8 @@ const Login = (props) => {
                             The Coffee Shop
                           </span>
                         </Card.Title>
-                        <div id="login">
-                          <h5 className="fw-normal h4 mb-3 pb-2">Login</h5>
+                        <div id="register">
+                          <h5 className="fw-normal h4 mb-3 pb-2">Register</h5>
                           <Form.Group
                             id="username"
                             className="form-outline mb-4"
@@ -82,7 +86,7 @@ const Login = (props) => {
                                 className="form-control form-control-lg"
                                 placeholder="Username"
                                 onChange={(e) =>
-                                  setLoginUsername(e.target.value)
+                                  setRegisterUsername(e.target.value)
                                 }
                               />
                               <InputGroup.Text>
@@ -101,7 +105,7 @@ const Login = (props) => {
                                 className="form-control form-control-lg"
                                 placeholder="Password"
                                 onChange={(e) =>
-                                  setLoginPassword(e.target.value)
+                                  setRegisterPassword(e.target.value)
                                 }
                               />
                               <InputGroup.Text>
@@ -110,17 +114,30 @@ const Login = (props) => {
                             </InputGroup>
                           </Form.Group>
 
-                          <div id="loginButton" className="pt-1 mb-4">
-                            <Link to="/products">
-                              <Button
-                                size="lg"
-                                className="w-100 shadow"
-                                variant="dark"
-                                onClick={loginHandler}
-                              >
-                                Login
-                              </Button>
-                            </Link>
+                          <div id="registerButton" className="pt-1 mb-4">
+                            {/* <Link to="/products"> */}
+                            <Button
+                              size="lg"
+                              className="w-100 shadow"
+                              variant="dark"
+                              onClick={registerHandler}
+                            >
+                              Register
+                            </Button>
+                            {/* </Link> */}
+                          </div>
+                          <div id="registerButton" className="pt-1 mb-4">
+                            {/* <Link to="/products"> */}
+
+                            <Button
+                              size="lg"
+                              className="w-100 shadow"
+                              variant="dark"
+                              onClick={toLoginHandler}
+                            >
+                              To Login
+                            </Button>
+                            {/* </Link> */}
                           </div>
                         </div>
                       </Form>
@@ -136,4 +153,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;

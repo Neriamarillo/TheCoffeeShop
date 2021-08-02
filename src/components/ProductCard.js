@@ -11,13 +11,13 @@ function ProductCard(props) {
 
   return (
     <Card className="rounded shadow productCard ">
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product._id}`}>
         <Card.Img variant="top" src={product.image} className="img-fluid" />
       </Link>
       <Card.Body>
         <Row>
           <Col className="productLink">
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product._id}`}>
               <Card.Title>{product.name}</Card.Title>
             </Link>
             <Row className="d-flex justify-content-between ">
@@ -38,7 +38,7 @@ function ProductCard(props) {
                 <Card.Text className="" id="rating">
                   {
                     <Rating
-                      key={product.id}
+                      key={product._id}
                       rating={product.rating ? product.rating : 0}
                     />
                   }

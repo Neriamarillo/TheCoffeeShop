@@ -30,7 +30,10 @@ function Home(props) {
             <Row xs={1} md={2} lg={3} className="g-4 ">
               {products.map((product) => (
                 <Col>
-                  <ProductCard key={product.id} product={product}></ProductCard>
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                  ></ProductCard>
                 </Col>
               ))}
             </Row>

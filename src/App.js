@@ -13,6 +13,9 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./actions/userActions";
+import Review from "./pages/Review";
+import Confirmation from "./pages/Confirmation";
+import Register from "./pages/Register";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -34,10 +37,12 @@ function App() {
             exact
             path="/"
             render={() => {
-              return <Redirect to="/login" />;
+              return <Redirect to="/register" />;
             }}
           />
+
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <ProtectedRoute
             path="/products"
             isAuthorized={userInfo}
@@ -50,14 +55,19 @@ function App() {
             component={ProductDetail}
           />
           <ProtectedRoute
-            path="/cart"
+            path="/cart/:id?"
             isAuthorized={userInfo}
             component={Cart}
           />
           <ProtectedRoute
-            path="/cart/:id"
+            path="/order/:id"
             isAuthorized={userInfo}
-            component={Cart}
+            component={Confirmation}
+          />
+          <ProtectedRoute
+            path="/review"
+            isAuthorized={userInfo}
+            component={Review}
           />
         </Switch>
       </div>

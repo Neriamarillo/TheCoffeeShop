@@ -22,7 +22,14 @@ function Cart(props) {
     : 1;
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  // const orderCreate = useSelector((state) => state.orderCreate);
   const dispatch = useDispatch();
+  // const { loading, success, error, order } = orderCreate;
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
   // Check if productId exists and then add it to cart
   useEffect(() => {
     if (productId) {
@@ -30,18 +37,10 @@ function Cart(props) {
     }
   }, [dispatch, productId, qty]);
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
-  };
-
-  const checkoutHandler = () => {
-    // Send to confirmation page
-    // props.history.push("/confirmation");
-  };
-
-  const subtotal =
-    cartItems &&
-    cartItems.reduce((accum, curr) => accum + curr.price * curr.qty, 0);
+  const subtotal = cartItems.reduce(
+    (accum, curr) => accum + curr.price * curr.qty,
+    0
+  );
   // Change taxRate according to state (Current is Texas)
   const taxRate = 0.0625;
   const salesTax = subtotal * taxRate;
@@ -49,21 +48,19 @@ function Cart(props) {
 
   return (
     <>
-      {cartItems && cartItems.length === 0 ? (
-        /* Empty Cart Component */
+      {cartItems.length === 0 ? (
         <div>
           <EmptyCart />
         </div>
       ) : (
-        /* Cart Component */
         <div>
-          <h2>Cart</h2>
           {/* Generate the row with a loop for each item in the cart */}
           <Row className="g-5">
+            <h2>Cart</h2>
             <Col className="order-md-last" md={4} lg={4} id="checkout">
               <Card className="mb-4">
                 <Card.Body>
-                  <Card.Title className="mb-3">Summary</Card.Title>
+                  <Card.Title className="mb-3 h2">Summary</Card.Title>
                   <ListGroup variant="flush">
                     <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 pb-0">
                       <Card.Text>
@@ -91,13 +88,11 @@ function Cart(props) {
                       </span>
                     </ListGroup.Item>
                   </ListGroup>
-                  <Button
-                    variant="primary"
-                    className="w-100"
-                    onClick={checkoutHandler}
-                  >
-                    Checkout
-                  </Button>
+                  <Link to="/review">
+                    <Button variant="primary" className="w-100">
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
@@ -107,6 +102,7 @@ function Cart(props) {
                   <ListGroup
                     variant="flush"
                     className="border-top border-bottom"
+                    key={item.product}
                   >
                     <ListGroup.Item>
                       <Row className="align-items-center ">
@@ -120,7 +116,7 @@ function Cart(props) {
                         <Col>
                           <div id="itemInfo">
                             <Link
-                              to={`/product/${item.id}`}
+                              to={`/product/${item.product}`}
                               className="text-primary"
                             >
                               <Card.Title id="itemName">{item.name}</Card.Title>

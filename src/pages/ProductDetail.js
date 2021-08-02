@@ -11,10 +11,9 @@ import { addToCart } from "../actions/cartActions.js";
 function ProductDetail(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
+  const [qty, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-
-  const [qty, setQty] = useState(1);
 
   useEffect(() => {
     dispatch(detailsProduct(productId));
@@ -25,9 +24,10 @@ function ProductDetail(props) {
   };
 
   const addToCartHandler = () => {
+    console.log(product);
     dispatch(addToCart(productId, Number(qty)));
     // Goal to remove this link to cart
-    props.history.push(`/cart/${product.id}?qty=${qty}`);
+    props.history.push(`/cart/${productId}?qty=${qty}`);
   };
 
   return (
@@ -53,7 +53,7 @@ function ProductDetail(props) {
                 </Card.Text>
                 <Card.Text className="my-2" id="rating">
                   <Rating
-                    key={product.id}
+                    key={productId}
                     rating={product.rating ? product.rating : 0}
                   />{" "}
                   {product.rating}

@@ -1,7 +1,7 @@
 import {
   CART_ADD_ITEM,
+  CART_EMPTY,
   CART_REMOVE_ITEM,
-  DELETE_CART,
 } from "../constants/cartConstants";
 
 const cartReducer = (state = { cartItems: [] }, action) => {
@@ -33,8 +33,8 @@ const cartReducer = (state = { cartItems: [] }, action) => {
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
-    case DELETE_CART:
-      return {};
+    case CART_EMPTY:
+      return { ...state, cartItems: [] };
     default:
       return state;
   }
