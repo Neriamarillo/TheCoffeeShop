@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 import path from "path";
 import express from "express";
 import session from "express-session";
@@ -22,9 +23,10 @@ app.use(
     cookie: {},
   })
 );
+const __dirname = fileURLToPath(import.meta.url);
+app.use(express.static(path.resolve(__dirname, "../build", "index.html")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, "../build", "index.html")));
 // app.use(express.static("public"));
 app.use(
   cors({
