@@ -23,10 +23,10 @@ app.use(
     cookie: {},
   })
 );
-
-app.use(express.static(path.resolve(process.cwd(), "/build")));
+const __dirname = path.resolve(process.cwd);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "build")));
 // app.use(express.static("public"));
 app.use(
   cors({
@@ -144,7 +144,7 @@ app.get("/api/users/logout", function (req, res) {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(process.cwd(), "/build", "index.html"));
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 app.listen(PORT, () => {
