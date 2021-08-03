@@ -24,7 +24,7 @@ app.use(
   })
 );
 const __dirname = fileURLToPath(import.meta.url);
-app.use(express.static(path.resolve(__dirname, "../build", "index.html")));
+app.use(express.static(path.resolve(__dirname, "build")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static("public"));
@@ -144,7 +144,7 @@ app.get("/api/users/logout", function (req, res) {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
 app.listen(PORT, () => {
