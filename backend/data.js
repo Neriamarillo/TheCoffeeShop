@@ -6,6 +6,19 @@ const data = {
     },
   ],
   products: [
+    db.products.insertOne(
+      {
+        "type" : "coffee-brewer",
+        "name" : "X60",
+        "brand" : "Vario",
+        "price" : 25.5,
+        "description" :
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "image" : "/images/v60.jpg",
+        "stock" : 10,
+        "rating" : 3.5,
+      }
+    )
     {
       id: "1",
       type: "kettle",

@@ -1,14 +1,5 @@
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  InputGroup,
-  Badge,
-} from "react-bootstrap";
-import { MdAccountCircle } from "react-icons/md";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { Navbar, Nav, Button, Badge } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -18,31 +9,24 @@ function Header(props) {
     : 0;
 
   return (
-    <Navbar expand="lg" bg="primary" variant="primary">
+    <Navbar expand="lg" bg="primary" variant="dark">
       <Navbar.Brand className="ps-3">
         <Link to="/products">
           <FiCoffee /> The Coffee Shop
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Form className="ms-auto" id="search">
-          <InputGroup className="navSearch">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="mr-3 bg-primary"
-            />
-            <Button variant="dark" className="bg-primary">
-              <FaSearch />
-            </Button>
-          </InputGroup>
-        </Form>
-        <Nav className="ms-2 p-2">
+      <Navbar.Collapse id="responsive-navbar-nav ">
+        <Nav className="ms-auto p-2">
           <Nav.Item className="me-0 " id="profile">
             <Link to="/account">
-              <Button size="sm" variant="dark" className="bg-primary">
-                <MdAccountCircle className="navIcons" />
+              <Button
+                onClick={props.handleLogout}
+                size="sm"
+                variant="dark"
+                className="bg-primary"
+              >
+                {props.userInfo && "Logout"}
               </Button>
             </Link>
           </Nav.Item>

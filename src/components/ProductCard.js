@@ -1,18 +1,16 @@
-import { useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import currencyFormat from "../helpers/utils";
 import Rating from "../components/Rating";
-import { Card, Button, InputGroup, Row, Col, Form } from "react-bootstrap";
-import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
+import { Card, Row, Col } from "react-bootstrap";
 
 function ProductCard(props) {
   const { product } = props;
 
   return (
-    <Card className="rounded shadow productCard ">
-      <Link to={`/product/${product._id}`}>
-        <Card.Img variant="top" src={product.image} className="img-fluid" />
+    <Card key={props.id} className="rounded shadow productCard pt-3">
+      <Link to={`/product/${product._id}`} className="my-auto">
+        <Card.Img variant="top" src={product.image} className="img-fluid " />
       </Link>
       <Card.Body>
         <Row>

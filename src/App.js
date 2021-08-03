@@ -30,14 +30,23 @@ function App() {
 
   return (
     <Router>
-      <Header cartItems={cartItems} />
+      <Header
+        cartItems={cartItems}
+        handleLogout={handleLogout}
+        userInfo={userInfo}
+      />
+
       <div className="content">
         <Switch>
           <Route
             exact
             path="/"
             render={() => {
-              return <Redirect to="/register" />;
+              return userInfo ? (
+                <Redirect to="/login" />
+              ) : (
+                <Redirect to="/register" />
+              );
             }}
           />
 

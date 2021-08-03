@@ -9,12 +9,9 @@ import {
 } from "react-bootstrap";
 import { MdAccountCircle, MdVpnKey } from "react-icons/md";
 import { FiCoffee } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Axios from "axios";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/userActions";
-import Loading from "../components/Loading";
 import Message from "../components/Message";
 
 const Register = (props) => {
@@ -22,7 +19,7 @@ const Register = (props) => {
   const [registerPassword, setRegisterPassword] = useState("");
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { userInfo, loading, error } = userRegister;
+  const { error } = userRegister;
 
   const dispatch = useDispatch();
 
@@ -35,17 +32,10 @@ const Register = (props) => {
     props.history.push("/login");
   };
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       props.history.push("/login");
-  //     }
-  //   }, [props.history, userInfo]);
-
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : error ? (
+      {" "}
+      {error ? (
         <Message type="login">{error}</Message>
       ) : (
         <Container fluid className=" w-75 h-100">

@@ -26,8 +26,18 @@ body,
   flex: 0 1 40px;
 }
 
-h1 {
+/* h1 {
   letter-spacing: 1px;
+} */
+
+h1 {
+  color: #3e3f3a;
+  /* font-family: "Helvetica Neue", sans-serif; */
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
 }
 
 .content h1 {
@@ -50,6 +60,11 @@ h1 {
   padding-right: 12px;
 }
 
+.navbar-collapse {
+  /* background-color: #8e8c84; */
+  color: white;
+}
+
 #search > input::placeholder {
   color: white;
 }
@@ -65,13 +80,11 @@ h1 {
   color: white;
 }
 
-#profile > a > button > svg,
+#profile > a > button,
 #cart > a > button > svg {
   color: white;
   font-size: 1.2rem;
 }
-
-/* #cart > a > button > svg */
 
 .footerLinks {
   text-align: center;
@@ -95,8 +108,6 @@ a.footerLinks > svg {
 }
 
 .productCard {
-  /* width: 21rem; */
-  /* height: 31rem; */
   size: 18rem;
   max-height: 26rem;
 }
@@ -118,7 +129,12 @@ a.footerLinks > svg {
 }
 
 .productDetailCard > .card-img {
-  height: 75vh;
+  height: 30vh;
+  object-fit: contain;
+}
+
+.cartProduct > img {
+  height: 15vh;
   object-fit: contain;
 }
 
@@ -140,6 +156,10 @@ a.footerLinks > svg {
   height: 50vh;
   object-fit: contain;
   align-content: center;
+}
+
+.eCart {
+  align-items: center;
 }
 
 .cardImgEcart {
@@ -184,4 +204,16 @@ a.footerLinks > svg {
 
 .deleteCart svg {
   font-size: 0.9rem;
+}
+
+.totals tr td {
+  font-size: 13px;
+}
+
+.product-qty span {
+  font-size: 12px;
+}
+
+.receiptBrand {
+  background-color: #8e8c84;
 }

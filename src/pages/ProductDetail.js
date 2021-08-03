@@ -7,6 +7,7 @@ import Rating from "../components/Rating";
 import currencyFormat from "../helpers/utils";
 import { Card, Button, Row, Col, Container, Form } from "react-bootstrap";
 import { addToCart } from "../actions/cartActions.js";
+import { Link } from "react-router-dom";
 
 function ProductDetail(props) {
   const dispatch = useDispatch();
@@ -24,9 +25,8 @@ function ProductDetail(props) {
   };
 
   const addToCartHandler = () => {
-    console.log(product);
+    // console.log(product);
     dispatch(addToCart(productId, Number(qty)));
-    // Goal to remove this link to cart
     props.history.push(`/cart/${productId}?qty=${qty}`);
   };
 
@@ -37,75 +37,82 @@ function ProductDetail(props) {
       ) : error ? (
         <Message>{error}</Message>
       ) : (
-        <Card className="h-100">
-          <Row className="g-0">
-            <Col xs={12} md={6} className="productDetailCard">
-              <Card.Img src={product.image} className="img-fluid" />
-            </Col>
-            <Col xs={12} md={6}>
-              <Card.Body>
-                <Card.Title id="name">{product.name}</Card.Title>
-                <Card.Text id="brand" className="my-2">
-                  {product.brand}
-                </Card.Text>
-                <Card.Text id="description" className="my-2">
-                  {product.description}
-                </Card.Text>
-                <Card.Text className="my-2" id="rating">
-                  <Rating
-                    key={productId}
-                    rating={product.rating ? product.rating : 0}
-                  />{" "}
-                  {product.rating}
-                </Card.Text>
-                <Card.Text
-                  id="price"
-                  style={{ fontSize: "1.5rem", fontWeight: "bold" }}
-                  className="my-0"
-                >
-                  {currencyFormat(product.price)}
-                </Card.Text>
-                <div id="availability" className="mb-3">
-                  {product.stock > 0 ? (
-                    <Card.Text className="success">
-                      {product.stock} In Stock
-                    </Card.Text>
-                  ) : (
-                    <Card.Text className="failure">Sold Out</Card.Text>
-                  )}
-                </div>
-                <>
-                  <Row>
-                    <Col xs={3} lg={3}>
-                      <Form.Select
-                        value={product.qty}
-                        onChange={handleChangeQty}
-                      >
-                        {[...Array(product.stock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="my-3">
-                      <Button
-                        variant="primary"
-                        className="btn-small ms-auto shadow-sm"
-                        onClick={addToCartHandler}
-                        disabled={product.stock === 0}
-                      >
-                        Add to Cart
-                      </Button>
-                    </Col>
-                  </Row>
-                </>
-              </Card.Body>
-            </Col>
-          </Row>
-        </Card>
+        <Row className="mx-auto">
+          <div className="py-3 d-flex ">
+            <Link to="/products" className="float-start ms-2">
+              <Button className="shadow-sm">Back to products</Button>
+            </Link>
+          </div>
+          <Card className="h-100 pt-2 border-0">
+            <Row className="g-0">
+              <Col xs={12} md={6} className="productDetailCard my-auto">
+                <Card.Img src={product.image} className="img-fluid" />
+              </Col>
+              <Col xs={12} md={6}>
+                <Card.Body>
+                  <Card.Title id="name">{product.name}</Card.Title>
+                  <Card.Text id="brand" className="my-2">
+                    {product.brand}
+                  </Card.Text>
+                  <Card.Text id="description" className="my-2">
+                    {product.description}
+                  </Card.Text>
+                  <Card.Text className="my-2" id="rating">
+                    <Rating
+                      key={productId}
+                      rating={product.rating ? product.rating : 0}
+                    />{" "}
+                    {product.rating}
+                  </Card.Text>
+                  <Card.Text
+                    id="price"
+                    style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                    className="my-0"
+                  >
+                    {currencyFormat(product.price)}
+                  </Card.Text>
+                  <div id="availability" className="mb-3">
+                    {product.stock > 0 ? (
+                      <Card.Text className="success">
+                        {product.stock} In Stock
+                      </Card.Text>
+                    ) : (
+                      <Card.Text className="failure">Sold Out</Card.Text>
+                    )}
+                  </div>
+                  <>
+                    <Row>
+                      <Col xs={3} lg={3}>
+                        <Form.Select
+                          value={product.qty}
+                          onChange={handleChangeQty}
+                        >
+                          {[...Array(product.stock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="my-3">
+                        <Button
+                          variant="primary"
+                          className="btn-small ms-auto shadow-sm"
+                          onClick={addToCartHandler}
+                          disabled={product.stock === 0}
+                        >
+                          Add to Cart
+                        </Button>
+                      </Col>
+                    </Row>
+                  </>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
+        </Row>
       )}
     </Container>
   );

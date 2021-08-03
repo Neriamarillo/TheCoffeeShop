@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { MdAccountCircle, MdVpnKey } from "react-icons/md";
 import { FiCoffee } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
@@ -17,9 +17,9 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 
 const Login = (props) => {
+  const history = useHistory();
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [isAuth, setIsAuth] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading, error } = userLogin;
@@ -33,9 +33,9 @@ const Login = (props) => {
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push("/products");
+      history.push("/products");
     }
-  }, [props.history, userInfo]);
+  }, [history, props.history, userInfo]);
 
   return (
     <>

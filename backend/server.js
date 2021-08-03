@@ -4,41 +4,37 @@ import session from "express-session";
 import cors from "cors";
 import passport from "passport";
 import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import data from "./data.js";
 import User from "./models/userModel.js";
 import Order from "./models/orderModel.js";
 import Product from "./models/productModel.js";
-
 dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {},
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-// app.use(cors());
 app.use(
   cors({
     origin: "http://localhost:3000", //  <-- Location of React app
     credentials: true,
   })
 );
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {},
-  })
-);
-
-app.use(cookieParser(process.env.SESSION_SECRET));
 
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/usersDB";
 
 mongoose.connect(
-  process.env.MONGODB_URI || MONGO_LOCAL_URL,
+  process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -58,23 +54,25 @@ passport.deserializeUser(User.deserializeUser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
 // Routes
 // User routes
 app.post(
   "/api/users/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   function (req, res) {
-    console.log(JSON.stringify(req.user));
     res.send(req.user);
   }
 );
 app.get("/api/users/login", (req, res) => {
-  if (req.isAuthenticated) {
-    res.send({ isAuth: true, user: req.session.user });
-  } else {
-    res.send({ isAuth: false });
-    // res.redirect("/");
-  }
+  res.redirect("/login");
 });
 
 app.post("/api/users/register", (req, res) => {
@@ -87,16 +85,16 @@ app.post("/api/users/register", (req, res) => {
         console.log("Error while registering user!", err);
         res.send("User already exists.");
         res.redirect("/login");
+      } else {
+        console.log("User registered!");
+        res.redirect("/login");
       }
-
-      console.log("User registered!");
-      res.redirect("/");
     }
   );
 });
 
 // Order routes
-app.post("/api/orders", async (req, res) => {
+app.post("/api/orders", checkAuthentication, async (req, res, next) => {
   if (req.body.orderItems.length === 0) {
     res.status(400).send({ message: "Cart is empty" });
   } else {
@@ -111,12 +109,8 @@ app.post("/api/orders", async (req, res) => {
     res.status(201).send({ message: "New order created", order: createdOrder });
   }
 });
-// app.get("/api/orders", async (req, res) => {
-//   const orders = await Order.find({ user: req.user._id });
-//   res.send(orders);
-// });
 
-app.get("/api/orders/:id", async (req, res) => {
+app.get("/api/orders/:id", checkAuthentication, async (req, res, next) => {
   const order = await Order.findById(req.params.id);
   if (order) {
     res.send(order);
@@ -126,7 +120,7 @@ app.get("/api/orders/:id", async (req, res) => {
 });
 
 // Api Routes
-app.get("/api/products/:id", async (req, res) => {
+app.get("/api/products/:id", checkAuthentication, async (req, res, next) => {
   const product = await Product.findById(req.params.id);
   if (product) {
     res.send(product);
@@ -135,8 +129,7 @@ app.get("/api/products/:id", async (req, res) => {
   }
 });
 
-app.get("/api/products", async (req, res) => {
-  // res.send(data.products);
+app.get("/api/products", checkAuthentication, async (req, res, next) => {
   const products = await Product.find({});
   res.send(products);
 });
@@ -146,6 +139,6 @@ app.get("/api/users/logout", function (req, res) {
   res.redirect("/");
 });
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("Server running!");
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });

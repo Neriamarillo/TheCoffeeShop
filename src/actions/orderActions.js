@@ -12,7 +12,9 @@ import {
 const createOrder = (order) => async (dispatch) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
   try {
-    const { data } = await Axios.post("/api/orders", order);
+    const { data } = await Axios.post("/api/orders", order, {
+      withCredentials: true,
+    });
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem("cartItems");
@@ -30,7 +32,9 @@ const createOrder = (order) => async (dispatch) => {
 const detailsOrder = (orderId) => async (dispatch) => {
   dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
   try {
-    const { data } = await Axios.get(`/api/orders/${orderId}`);
+    const { data } = await Axios.get(`/api/orders/${orderId}`, {
+      withCredentials: true,
+    });
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =

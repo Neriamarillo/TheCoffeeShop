@@ -4,16 +4,14 @@ import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
   return (
-    // <div className="mt-100">
-    <Row className="mx-auto">
+    <Row className="justify-content-center align-items-center h-100 mx-4">
       <Col md={12}>
-        <Card className="mb-3 ">
-          <Card.Header className="p-3">
+        <Card className="text-center">
+          <Card.Header className="">
             <h5>Cart</h5>
           </Card.Header>
-          <Card.Body>
-            <Col sm={12} className="text-center">
-              {" "}
+          <Card.Body className="">
+            <Col sm={12} className="">
               <FaShoppingCart className="img-fluid mb-4 mr-3 cardImgEcart" />
               <Card.Text>
                 <h3>
@@ -21,14 +19,13 @@ const EmptyCart = () => {
                 </h3>
               </Card.Text>
               <Link to="/products">
-                <Button class="m-3">Continue Shopping</Button>
+                <Button class="m-3 shadow">Continue Shopping</Button>
               </Link>
             </Col>
           </Card.Body>
         </Card>
       </Col>
     </Row>
-    // </div>
   );
 };
 

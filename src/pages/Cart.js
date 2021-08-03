@@ -49,53 +49,17 @@ function Cart(props) {
   return (
     <>
       {cartItems.length === 0 ? (
-        <div>
-          <EmptyCart />
-        </div>
+        <EmptyCart />
       ) : (
         <div>
           {/* Generate the row with a loop for each item in the cart */}
-          <Row className="g-5">
-            <h2>Cart</h2>
-            <Col className="order-md-last" md={4} lg={4} id="checkout">
-              <Card className="mb-4">
-                <Card.Body>
-                  <Card.Title className="mb-3 h2">Summary</Card.Title>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 pb-0">
-                      <Card.Text>
-                        {`Subtotal: (${cartItems.reduce(
-                          (accum, curr) => accum + curr.qty,
-                          0
-                        )} items)`}
-                      </Card.Text>
-                      <span>{currencyFormat(subtotal)}</span>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 pb-0">
-                      <Card.Text>Shipping</Card.Text>
-                      <span>Free</span>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="d-flex justify-content-between text-center px-0 ">
-                      <Card.Text>Sales Tax</Card.Text>
-                      <span>{currencyFormat(salesTax)}</span>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 mb-3">
-                      <Card.Text>
-                        <strong>Total</strong>
-                      </Card.Text>
-                      <span>
-                        <strong>{currencyFormat(total)}</strong>
-                      </span>
-                    </ListGroup.Item>
-                  </ListGroup>
-                  <Link to="/review">
-                    <Button variant="primary" className="w-100">
-                      Proceed to Checkout
-                    </Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </Col>
+          <Row className="g-5 mx-auto">
+            <div className="pt-3 ">
+              <Link to="/products" className="float-start ms-2">
+                <Button className="">Back to products</Button>
+              </Link>
+              <h1 className="content">Cart</h1>
+            </div>
             <Col md={8} lg={8} id="products">
               {cartItems.map((item) => {
                 return (
@@ -106,9 +70,9 @@ function Cart(props) {
                   >
                     <ListGroup.Item>
                       <Row className="align-items-center ">
-                        <Col xs={2}>
+                        <Col xs={2} className="cartProduct">
                           <Card.Img
-                            className="img-fluid"
+                            className="img-fluid "
                             alt={item.name}
                             src={item.image}
                           ></Card.Img>
@@ -166,6 +130,45 @@ function Cart(props) {
                   </ListGroup>
                 );
               })}
+            </Col>
+            <Col className="order-md-last" md={4} lg={4} id="checkout">
+              <Card className="mb-4">
+                <Card.Body>
+                  <Card.Title className="mb-3 h2">Summary</Card.Title>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 pb-0">
+                      <Card.Text>
+                        {`Subtotal: (${cartItems.reduce(
+                          (accum, curr) => accum + curr.qty,
+                          0
+                        )} items)`}
+                      </Card.Text>
+                      <span>{currencyFormat(subtotal)}</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 pb-0">
+                      <Card.Text>Shipping</Card.Text>
+                      <span>Free</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="d-flex justify-content-between text-center px-0 ">
+                      <Card.Text>Sales Tax</Card.Text>
+                      <span>{currencyFormat(salesTax)}</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="d-flex justify-content-between text-center border-0 px-0 mb-3">
+                      <Card.Text>
+                        <strong>Total</strong>
+                      </Card.Text>
+                      <span>
+                        <strong>{currencyFormat(total)}</strong>
+                      </span>
+                    </ListGroup.Item>
+                  </ListGroup>
+                  <Link to="/review">
+                    <Button variant="primary" className="w-100">
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
         </div>
