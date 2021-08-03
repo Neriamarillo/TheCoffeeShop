@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import path from "path";
 import express from "express";
 import session from "express-session";
 import cors from "cors";
@@ -23,7 +24,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.resolve(__dirname, "/build")));
+// app.use(express.static("public"));
 app.use(
   cors({
     origin: "http://localhost:3000", //  <-- Location of React app
@@ -137,6 +139,10 @@ app.get("/api/products", checkAuthentication, async (req, res, next) => {
 app.get("/api/users/logout", function (req, res) {
   req.logout();
   res.redirect("/");
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
 });
 
 app.listen(PORT, () => {
