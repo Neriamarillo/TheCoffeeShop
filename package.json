@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "node backend/server.js",
+    "server": "nodemon backend/server.js",
     "dev": "run-p server start",
     "start-app": "run-p server start",
     "build": "react-scripts build"
