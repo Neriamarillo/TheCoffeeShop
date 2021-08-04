@@ -159,7 +159,7 @@ const Review = (props) => {
 }`;
 
       const webhookUrl =
-        "https://hooks.slack.com/services/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";
+        "https://hooks.slack.com/services/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";
 
       let res = await axios.post(webhookUrl, data, {
         withCredentials: false,

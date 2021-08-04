@@ -20,7 +20,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
-    cookie: {},
+    cookie: { sameSite: "strict" },
   })
 );
 const __dirname = path.resolve(process.cwd());
