@@ -13,7 +13,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
-import Loading from "../components/Loading";
 import Message from "../components/Message";
 
 const Login = (props) => {
@@ -22,7 +21,7 @@ const Login = (props) => {
   const [loginPassword, setLoginPassword] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, loading, error } = userLogin;
+  const { userInfo, error } = userLogin;
 
   const dispatch = useDispatch();
 
@@ -39,10 +38,8 @@ const Login = (props) => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <Message type="login">{error}</Message>
+      {error ? (
+        <Message>{error}</Message>
       ) : (
         <Container fluid className=" w-75 h-100">
           <Row className=" justify-content-center align-items-center h-100">

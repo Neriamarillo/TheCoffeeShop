@@ -38,17 +38,9 @@ function App() {
 
       <div className="content">
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return userInfo ? (
-                <Redirect to="/login" />
-              ) : (
-                <Redirect to="/register" />
-              );
-            }}
-          />
+          <Route exact path="/">
+            {userInfo ? <Redirect to="/products" /> : <Login />}
+          </Route>
 
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

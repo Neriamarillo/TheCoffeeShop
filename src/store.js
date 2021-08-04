@@ -12,11 +12,11 @@ import {
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const initialState = {
-  // userLogin: {
-  //   userInfo: localStorage.getItem("userInfo")
-  //     ? JSON.parse(localStorage.getItem("userInfo"))
-  //     : null,
-  // },
+  userLogin: {
+    userInfo: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
+  },
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))

@@ -109,7 +109,8 @@ a.footerLinks > svg {
 
 .productCard {
   size: 18rem;
-  max-height: 26rem;
+  min-height: 26rem;
+  max-height: 30rem;
 }
 
 .productLink > a {

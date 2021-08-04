@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
 import path from "path";
 import express from "express";
 import session from "express-session";
@@ -9,6 +8,7 @@ import mongoose from "mongoose";
 import User from "./models/userModel.js";
 import Order from "./models/orderModel.js";
 import Product from "./models/productModel.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
@@ -34,6 +34,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/usersDB";
 

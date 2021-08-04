@@ -17,6 +17,7 @@ const login = (username, password) => async (dispatch) => {
       password,
     });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data.username });
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -36,6 +37,7 @@ const register = (username, password) => async (dispatch) => {
       password,
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,

@@ -10,7 +10,7 @@ const Footer = () => {
         <Col md={12} className="py-1">
           <div className="footerLinks">
             <a
-              href="https://www.github.com/Neriamarillo"
+              href="https://www.linkedin.com/in/jorgenieves769/"
               className="footerLinks me-md-5 me-3"
             >
               <FaLinkedin />{" "}
