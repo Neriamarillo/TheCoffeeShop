@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# The Coffee Shop Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Coffee Shop is a web application written using [ReactJS](https://reactjs.org/) alongside a server created with [NodeJS](https://nodejs.org/) using [ExpressJS](http://expressjs.com/). Features include:
 
-## Available Scripts
+- User Authentication using [PassportJS](http://www.passportjs.org/) and a session cookie.
+- Data Storage using [MongoDB](https://www.mongodb.com/), [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and [Mongoose](https://mongoosejs.com/).
+- Frontend (ReactJS) code separated from the backend (NodeJS/ExpressJS).
+- Protected server routes with authentication.
+- Responsive UI using the [React-Bootstrap](https://react-bootstrap.github.io/) framework, Bootstrap build for React.
+- Searchable items.
+- Slack notification integration via Slack webhook to send purchase receipt.
+- Hosted on [Heroku](https://www.heroku.com/)
 
-In the project directory, you can run:
+### [The Coffee Shop hosted on Heroku](https://jn-the-coffee-shop.herokuapp.com)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Git clone this repository.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Navigate to application folder.
 
-### `npm test`
+#### In a terminal, run the following command to install all necessary modules.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm install`
 
-### `npm run build`
+- Create a `.env` file in the root folder.
+- Inside `.env` create:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`SESSION_SECRET=`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Write any secret phrase you wish to utilize as a secret session storage. Make sure to keep it secure once you have saved it to the file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`MONGODB_URI=`
 
-### `npm run eject`
+Use this to write down your MongoDB url. If using a local instance of MongoDB that would look something like:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`MONGODB_URI="mongodb://localhost:27017/<database-name-here>"`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If using MongoDB Atlas instance, then write your link located in your Atlas dashboard along with your credentials inside the link.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+For the Slack Webhook, go to the `Review.js` file inside the `src/Components` folder and set the `webhookUrl` value the webhook provided by Slack.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Usage
 
-## Learn More
+Make sure that your MongoDB instance is working by running the command
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`mongosh`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If working with MongoDB Atlas, run
 
-### Code Splitting
+`mongosh "mongodb+srv://<your-cluster-information-here>" --username <your-username-here>`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To run the application locally first run:
 
-### Analyzing the Bundle Size
+`npm run start-app`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+After the server has come up, open a browser at:
 
-### Making a Progressive Web App
+`http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Enjoy the app!
