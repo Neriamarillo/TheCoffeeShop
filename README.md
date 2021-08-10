@@ -58,4 +58,14 @@ After the server has come up, open a browser at:
 
 `http://localhost:3000`
 
+### Docker
+
+To use this application inside of a Docker container, run the following command in a terminal inside the project folder:
+
+`docker build -t coffee-shop .`
+
+To run the Docker container, run:
+
+`docker run --rm -it -p 3000:3000/tcp -p 5000:5000/tcp coffee-shop:latest`
+
 #### Enjoy the app!
